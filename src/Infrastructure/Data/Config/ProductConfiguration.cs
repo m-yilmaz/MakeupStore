@@ -9,13 +9,19 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Data.Config
 {
-    public class CategoryConfiguration : IEntityTypeConfiguration<Category>
+    public class ProductConfiguration : IEntityTypeConfiguration<Product>
     {
-        public void Configure(EntityTypeBuilder<Category> builder)
+        public void Configure(EntityTypeBuilder<Product> builder)
         {
             builder.Property(x => x.Name)
                 .IsRequired()
                 .HasMaxLength(100);
+
+            builder.Property(x => x.Price)
+                .HasPrecision(18, 2)
+                .HasColumnType("money");
+
+            builder.Property(x => x.PictureUri).HasMaxLength(400);
         }
     }
 }

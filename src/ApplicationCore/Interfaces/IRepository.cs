@@ -18,7 +18,7 @@ namespace ApplicationCore.Interfaces
 
         Task<T> AddAsnyc(T entity);
 
-        Task<T> UpdateAsnyc(T entity);
+        Task UpdateAsnyc(T entity);
 
         Task<T> DeleteAsnyc(T entity);
 
