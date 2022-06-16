@@ -11,5 +11,7 @@ namespace Web.Models
 
         public int? BrandId { get; set; }
         public int? CategoryId { get; set; }
+
+        public PagenationInfoViewModel PagenationInfo { get; set; }
     }
 }

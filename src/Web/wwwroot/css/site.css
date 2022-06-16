@@ -1,7 +1,7 @@
 ﻿body {
     font-family: 'Lato', sans-serif;
+    font-weight: 400;
 }
-
 
 a.navbar-brand {
     white-space: normal;
@@ -9,10 +9,8 @@ a.navbar-brand {
     word-break: break-all;
 }
 
-
 /* Sticky footer styles
 -------------------------------------------------- */
-
 .border-top {
     border-top: 1px solid #e5e5e5;
 }
@@ -49,12 +47,12 @@ body {
     white-space: nowrap;
     line-height: 60px; /* Vertically center the text there */
 }
-/* Product Listing
--------------------------------------------------- */
 
+/* Products Listing
+-------------------------------------------------- */
 .product-name {
     font-size: 1rem;
-    font-weight: 500;
+    font-weight: 600;
     line-height: 1.3rem;
     height: 2.6rem;
     overflow: hidden;

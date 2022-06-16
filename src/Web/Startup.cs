@@ -1,5 +1,6 @@
-using ApplicationCore.Entities;
+﻿using ApplicationCore.Entities;
 using ApplicationCore.Interfaces;
+using ApplicationCore.Services;
 using Infrastructure.Data;
 using Infrastructure.Identity;
 using Microsoft.AspNetCore.Builder;
@@ -13,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Web.Interfaces;
@@ -40,9 +42,12 @@ namespace Web
                 options.UseNpgsql(
                     Configuration.GetConnectionString("StoreContext")));
 
+
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
+            services.AddScoped<IBaskerService, BasketService>();
             services.AddScoped<IHomeViewModelService, HomeViewModelService>();
-            
+            services.AddScoped<IBasketViewModelService, BasketViewModelService>();
+
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
@@ -67,6 +72,17 @@ namespace Web
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
+
+            var ci = new CultureInfo("en-US");
+            ci.NumberFormat.CurrencySymbol = "€";
+            var supportedCultures = new[] { ci };
+            app.UseRequestLocalization(options =>
+            {
+                options.SupportedCultures = supportedCultures;
+                options.SupportedUICultures = supportedCultures;
+            });
+
+
             app.UseStaticFiles();
 
             app.UseRouting();
