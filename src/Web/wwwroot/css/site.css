@@ -60,3 +60,19 @@ body {
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
 }
+
+/* Sweet Alert
+-------------------------------------------------- */
+h2.swal2-title{
+    letter-spacing:0
+}
+
+/* Basket
+-------------------------------------------------- */
+body {
+    padding: 3rem;
+}
+
+.number-input > .quantity {
+    width: 70px;
+}

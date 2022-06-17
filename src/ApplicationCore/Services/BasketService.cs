@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Services
 {
-    public class BasketService : IBaskerService
+    public class BasketService : IBasketService
     {
         private readonly IRepository<Basket> _basketRepo;
 
@@ -20,8 +20,7 @@ namespace ApplicationCore.Services
 
         public async Task<Basket> AddItemToBasketAsync(string buyerId, int productId, int quantity)
         {
-            var specBasket = new BasketWithItemsSpecification(buyerId);
-            var basket = await _basketRepo.FirstOrDefaultAsync(specBasket);
+            var basket = await GetBasketAsync(buyerId);
 
             if (basket == null)
             {
@@ -39,6 +38,21 @@ namespace ApplicationCore.Services
             await _basketRepo.UpdateAsnyc(basket);
 
             return basket;
+        }
+
+        public async Task<Basket> GetBasketAsync(string buyerId)
+        {
+            var specBasket = new BasketWithItemsSpecification(buyerId);
+            return await _basketRepo.FirstOrDefaultAsync(specBasket);
+        }
+
+        public async Task<int> GetBasketItemsCountAsync(string buyerId)
+        {
+            if (buyerId == null) return 0;
+            var basket = await GetBasketAsync(buyerId);
+
+            return basket == null ? 0 : basket.Items.Sum(x => x.Quantity);
+
         }
     }
 }

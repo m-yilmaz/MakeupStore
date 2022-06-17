@@ -1,0 +1,8 @@
+﻿@model NavBasketViewModel
+<ul class="navbar-nav">
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Basket" asp-action="Index">
+            Cart <span class="badge badge-primary" id="navBasketItemCount">@Model.TotalItems</span>
+        </a>
+    </li>
+</ul>

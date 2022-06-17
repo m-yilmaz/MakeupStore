@@ -7,8 +7,11 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Interfaces
 {
-    public interface IBaskerService
+    public interface IBasketService
     {
+        Task<Basket> GetBasketAsync(string buyerId);
         Task<Basket> AddItemToBasketAsync(string buyerId, int productId, int quantity);
+
+        Task<int> GetBasketItemsCountAsync(string buyerId);
     }
 }
