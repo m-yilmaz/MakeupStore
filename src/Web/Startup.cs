@@ -18,6 +18,7 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Web.Interfaces;
+using Web.Middlewares;
 using Web.Services;
 
 namespace Web
@@ -89,6 +90,8 @@ namespace Web
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseTransferBasket();
 
             app.UseEndpoints(endpoints =>
             {

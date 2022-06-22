@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Web.Interfaces;
 
@@ -13,11 +14,15 @@ namespace Web.Controllers
             _basketViewModelService = basketViewModelService;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Index() => View(await _basketViewModelService.GetBasketViewModelAsync());
 
-        public async Task<IActionResult> Index()
+        [HttpPost, ValidateAntiForgeryToken]
+        public async Task<ActionResult> Index(Dictionary<int, int> quantities)
         {
-
-            return View(await _basketViewModelService.GetBasketViewModelAsync()); 
+            var basket = await _basketViewModelService.SetQuantities(quantities);
+            TempData["Message"] = "Items updated successfully";
+            return View(basket);
         }
 
         [HttpPost]
@@ -26,5 +31,22 @@ namespace Web.Controllers
             int totalItems = await _basketViewModelService.AddItemToBasketAsync(productId, quantity);
             return Json(new { totalItems });
         }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public async Task<IActionResult> EmptyBasket()
+        {
+            await _basketViewModelService.DeleteBasketAsync();
+            TempData["Message"] = "All items removed from cart successfully";
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public async Task<IActionResult> RemoveItem(int itemId)
+        {
+            await _basketViewModelService.DeleteBasketItemAsync(itemId);
+            TempData["Message"] = "Item removed from cart successfully";
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 }
