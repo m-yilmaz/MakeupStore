@@ -36,11 +36,11 @@ namespace Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AppIdentityDbContext>(options =>
-                options.UseNpgsql(
+                options.UseSqlServer(
                     Configuration.GetConnectionString("AppIdentityDbContext")));
 
             services.AddDbContext<StoreContext>(options =>
-                options.UseNpgsql(
+                options.UseSqlServer(
                     Configuration.GetConnectionString("StoreContext")));
 
 
