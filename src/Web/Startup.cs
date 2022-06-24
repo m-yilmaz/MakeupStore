@@ -48,6 +48,7 @@ namespace Web
             services.AddScoped<IBasketService, BasketService>();
             services.AddScoped<IHomeViewModelService, HomeViewModelService>();
             services.AddScoped<IBasketViewModelService, BasketViewModelService>();
+            services.AddScoped<IOrderService, OrderService>();
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
@@ -75,7 +76,7 @@ namespace Web
             app.UseHttpsRedirection();
 
             var ci = new CultureInfo("en-US");
-            ci.NumberFormat.CurrencySymbol = "€";
+            ci.NumberFormat.CurrencySymbol = "₺";
             var supportedCultures = new[] { ci };
             app.UseRequestLocalization(options =>
             {

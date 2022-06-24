@@ -12,10 +12,14 @@ namespace Web.Interfaces
         Task<int> AddItemToBasketAsync(int product, int quantity);
 
         Task<NavBasketViewModel> GetNavBasketViewModelAsync();
+
         Task DeleteBasketAsync();
+
         Task DeleteBasketItemAsync(int basketItemId);
 
-        Task<BasketViewModel> SetQuantities(Dictionary<int, int> quantities); 
+        Task<BasketViewModel> SetQuantitiesAsync(Dictionary<int, int> quantities);
+
+        Task<OrderViewModel> ComplateCheckoutAsync(Address address);
 
     }
 }

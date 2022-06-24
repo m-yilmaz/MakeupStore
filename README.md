@@ -27,7 +27,7 @@ Install-Package Microsoft.AspNetCore.Identity.EntityFrameworkCore -v 5.0.17
 ## Migrations
 ```
 /Infrastructure
-Add-Migration InitialCreate -Context StoreContext -OutputDir Data/Migrations
+Add-Migration InitialStore -Context StoreContext -OutputDir Data/Migrations
 Update-Database -Context StoreContext
 
 Add-Migration InitialCreate -Context AppIdentityDbContext -OutputDir Identity/Migrations
@@ -41,3 +41,5 @@ https://www.connectionstrings.com/npgsql/
 https://gist.github.com/yigith/c6f999788b833dc3d22ac6332a053dd1
 
 https://docs.microsoft.com/en-us/aspnet/core/fundamentals/middleware/write?view=aspnetcore-5.0
+
+https://getbootstrap.com/docs/4.6/examples/checkout/

@@ -3,17 +3,15 @@ using System;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Infrastructure.Data.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    [Migration("20220622141616_OrderAdded")]
-    partial class OrderAdded
+    partial class StoreContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -228,7 +226,6 @@ namespace Infrastructure.Data.Migrations
                                 .HasColumnType("character varying(90)");
 
                             b1.Property<string>("State")
-                                .IsRequired()
                                 .HasMaxLength(60)
                                 .HasColumnType("character varying(60)");
 

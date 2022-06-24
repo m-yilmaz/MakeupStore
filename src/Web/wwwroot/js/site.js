@@ -8,14 +8,21 @@ const Toast = Swal.mixin({
     timer: 2000,
     timerProgressBar: true,
     didOpen: (toast) => {
-        toast.addEventListener('mouseenter', Swal.stopTimer)
-        toast.addEventListener('mouseleave', Swal.resumeTimer)
+        toast.addEventListener('mouseenter', Swal.stopTimer);
+        toast.addEventListener('mouseleave', Swal.resumeTimer);
     }
-})
+});
 
 function successMessage(msg) {
     Toast.fire({
         icon: 'success',
         title: msg
-    })
+    });
+}
+
+function errorMessage(msg) {
+    Toast.fire({
+        icon: 'error',
+        title: msg
+    });
 }

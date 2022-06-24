@@ -55,9 +55,12 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script>
         const messageTempData = "@TempData["Message"]";
+        const errorTempData = "@TempData["error"]";
 
         if (messageTempData)
             successMessage(messageTempData);
+        if (errorTempData)
+            errorMessage(errorTempData);
     </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>

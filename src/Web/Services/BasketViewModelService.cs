@@ -19,15 +19,18 @@ namespace Web.Services
         private readonly IBasketService _basketService;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IOrderService _orderService;
+
         public string BuyerId => UserId ?? AnonymousId;
         public HttpContext HttpContext => _httpContextAccessor.HttpContext;
         public string UserId => HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier); // get user id
         public string AnonymousId => HttpContext.Request.Cookies[Constants.BASKET_COOKIENAME];
 
 
-        public BasketViewModelService(IBasketService basketService, IHttpContextAccessor httpContextAccessor, UserManager<ApplicationUser> userManager)
+        public BasketViewModelService(IBasketService basketService, IHttpContextAccessor httpContextAccessor, UserManager<ApplicationUser> userManager, IOrderService orderService)
         {
             _userManager = userManager;
+            _orderService = orderService;
             _basketService = basketService;
             _httpContextAccessor = httpContextAccessor;
         }
@@ -73,12 +76,21 @@ namespace Web.Services
             await _basketService.DeleteBasketItemAsync(BuyerId, basketItemId);
         }
 
-        public async Task<BasketViewModel> SetQuantities(Dictionary<int, int> quantities)
+        public async Task<BasketViewModel> SetQuantitiesAsync(Dictionary<int, int> quantities)
         {
-            var basket = await _basketService.SetQuantities(BuyerId, quantities);
+            var basket = await _basketService.SetQuantitiesAsync(BuyerId, quantities);
             return basket.ToBasketViewModel();
         }
 
-
+        public async Task<OrderViewModel> ComplateCheckoutAsync(Address address)
+        {
+            var order = await _orderService.CreateOrderAsync(BuyerId, address);
+            return new OrderViewModel()
+            {
+                Id = order.Id,
+                OrderDate = order.OrderDate,
+                TotalPrice = order.OrderItems.Sum(x => x.Quantity * x.UnitPrice)
+            };
+        }
     }
 }
