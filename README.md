@@ -23,6 +23,10 @@ Install-Package Npgsql.EntityFrameworkCore.PostgreSQL -v 5.0.10
 Install-Package Ardalis.Specification.EntityFrameworkCore -v 5.2.0
 Install-Package Microsoft.AspNetCore.Identity.EntityFrameworkCore -v 5.0.17
 
+
+Install-Package Microsoft.EntityFrameworkCore.SqlServer -v 5.0.17
+Install-Package Microsoft.EntityFrameworkCore.Tools -v 5.0.17
+
 ```
 ## Migrations
 ```
